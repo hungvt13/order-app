@@ -1,29 +1,21 @@
-import { Outlet, useNavigate } from 'react-router-dom';
-
-// constants
-import PAGE_PATH from '../../service/routes/constants';
+import { useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 // components
-import Button from '../../components/furniture/Button';
+import Topbar from '../Topbar';
+import { merchantActions } from '../../state/merchant';
 
 function App() {
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(merchantActions.fetchMerchantStart({ id: 13 }));
+  }, []);
 
   return (
     <div>
-      <div>App Page</div>
-      <Button
-        onClick={() => navigate(PAGE_PATH.LANDING_PAGE)}
-      >
-        Landing Page
-      </Button>
-      <Button
-        color="secondary"
-        onClick={() => navigate(PAGE_PATH.USER_PAGE)}
-      >
-        User Page
-      </Button>
-      <Button variant="contained">Test</Button>
+      <Topbar />
       <Outlet />
     </div>
   );
