@@ -9,6 +9,7 @@ const ErrorPage = lazy(() => retry(() => import('../../view/ErrorPage')));
 const UserPage = lazy(() => retry(() => import('../../view/UserPage')));
 const LandingPage = lazy(() => retry(() => import('../../view/LandingPage')));
 const MenuPage = lazy(() => retry(() => import('../../view/MenuPage')));
+const ItemPage = lazy(() => retry(() => import('../../view/ItemPage')));
 
 const routes = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const routes = createBrowserRouter([
       {
         path: PAGE_PATH.MENU_PAGE,
         element: <MenuPage />,
+      },
+      {
+        path: PAGE_PATH.ITEM_PAGE,
+        element: <ItemPage />,
       },
       {
         path: PAGE_PATH.LANDING_PAGE,
