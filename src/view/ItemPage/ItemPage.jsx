@@ -1,5 +1,5 @@
 import { useSelector, shallowEqual } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 
@@ -19,6 +19,12 @@ import { merchantSelector } from '../../state/merchant';
 // utils
 import { formatCurrency } from '../../service/utils/currencyFormatter';
 
+// custom hooks
+import useBackBtn from '../../hooks/useBackBtn';
+
+// constants
+import PAGE_PATH from '../../service/routes/constants';
+
 const StyledImage = styled('img')({
   height: '30dvh',
   width: '100%',
@@ -26,6 +32,8 @@ const StyledImage = styled('img')({
 });
 
 function ItemPage() {
+  const useBackBtnHook = useBackBtn();
+
   const [searchParams] = useSearchParams();
   const categoryId = searchParams.get('categoryId');
   const itemId = searchParams.get('itemId');
@@ -122,6 +130,10 @@ function ItemPage() {
       }));
     }
   }, [currentItem]);
+
+  useLayoutEffect(() => {
+    useBackBtnHook.showBackBtn(PAGE_PATH.MENU_PAGE);
+  }, []);
 
   return (
     <Grid container>

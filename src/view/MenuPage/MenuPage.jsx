@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import { useLayoutEffect } from 'react';
 
 // components
 import Grid from '@mui/material/Grid';
@@ -10,8 +11,17 @@ import MenuSearch from './MenuSearch';
 // state
 import { merchantSelector } from '../../state/merchant';
 
+// custom hooks
+import useBackBtn from '../../hooks/useBackBtn';
+
 function MenuPage() {
+  const useBackBtnHook = useBackBtn();
+
   const merchantData = useSelector(merchantSelector.merchantData);
+
+  useLayoutEffect(() => {
+    useBackBtnHook.hideBackBtn();
+  }, []);
 
   return (
     <Grid container>
