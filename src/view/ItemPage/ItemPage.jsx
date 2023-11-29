@@ -25,6 +25,9 @@ import useBackBtn from '../../hooks/useBackBtn';
 // constants
 import PAGE_PATH from '../../service/routes/constants';
 
+// assets
+import FoodPlaceholder from '../../asset/food_placeholder.svg';
+
 const StyledImage = styled('img')({
   height: '30dvh',
   width: '100%',
@@ -125,8 +128,8 @@ function ItemPage() {
         options: currentItem?.options
           ?.reduce((acc, option) => { acc[option.id] = []; return acc; }, {}),
         required: currentItem?.options
-          .filter((option) => option.required)
-          .map((option) => option.id),
+          ?.filter((option) => option.required)
+          ?.map((option) => option.id),
       }));
     }
   }, [currentItem]);
@@ -139,7 +142,7 @@ function ItemPage() {
     <Grid container>
       <Grid item xs={12}>
         <StyledImage
-          src={currentItem?.image_source}
+          src={currentItem?.image_source || FoodPlaceholder}
           alt=""
         />
       </Grid>
@@ -166,6 +169,7 @@ function ItemPage() {
                 <IconButton
                   color="primary"
                   onClick={() => handleChangeQuantity(-1)}
+                  disabled={selected.quantity === 1}
                 >
                   <RemoveCircleIcon fontSize="inherit" />
                 </IconButton>
