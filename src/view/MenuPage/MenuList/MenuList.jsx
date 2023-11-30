@@ -18,7 +18,7 @@ const ItemGrid = styled(Grid)(({ theme }) => ({
   borderBottom: `0.5px solid ${theme.palette.grey[300]}`,
   paddingBottom: theme.spacing(1),
   marginBottom: theme.spacing(1),
-  '&:nth-last-child(1)': {
+  '&:nth-last-of-type(1)': {
     borderBottom: 'none',
     paddingBottom: 0,
     marginBottom: theme.spacing(2),
