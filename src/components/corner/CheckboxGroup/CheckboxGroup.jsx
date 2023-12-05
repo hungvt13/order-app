@@ -23,19 +23,21 @@ function CheckboxGroup({
     >
       <FormLabel>{label}</FormLabel>
       {
-          data.map((item) => (
+          data.map(({
+            value, label: startLabel, endLabel, ...restDataProps
+          }) => (
             <FormControlLabel
-              key={item.value}
-              value={item.value}
-              checked={item.checked}
               disableTypography
+              key={value}
+              value={value}
               sx={{ width: '100%' }}
               control={<Checkbox />}
               label={
                 dualLabel
-                  ? <DualLabel startLabel={item.label} endLabel={item.endLabel} />
-                  : item.label
+                  ? <DualLabel startLabel={startLabel} endLabel={endLabel} />
+                  : startLabel
               }
+              {...restDataProps}
             />
           ))
         }
