@@ -7,11 +7,14 @@ import IconButton from '../../components/furniture/IconButton';
 
 import useBackBtn from '../../hooks/useBackBtn';
 
-const StyledBtn = styled(IconButton)(({ theme, isShow }) => ({
+const StyledDiv = styled('div')(({ theme }) => ({
   position: 'absolute',
-  display: (isShow ? 'flex' : 'none'),
+  left: theme.spacing(2),
+}));
+
+const StyledBtn = styled(IconButton)(({ theme }) => ({
+  position: 'fixed',
   top: 80,
-  left: 20,
   backgroundColor: theme.palette.primary.main,
   color: theme.palette.common.white,
   boxShadow: theme.shadows[2],
@@ -24,11 +27,14 @@ const StyledBtn = styled(IconButton)(({ theme, isShow }) => ({
 function BackButton() {
   const { show, navigateTo } = useBackBtn();
 
-  return (
-    <StyledBtn onClick={navigateTo} isShow={show}>
-      <ArrowBackIcon color="inherit" />
-    </StyledBtn>
-  );
+  return show
+    && (
+      <StyledDiv>
+        <StyledBtn onClick={navigateTo}>
+          <ArrowBackIcon color="inherit" />
+        </StyledBtn>
+      </StyledDiv>
+    );
 }
 
 export default BackButton;
