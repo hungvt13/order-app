@@ -13,14 +13,17 @@ import { merchantSelector } from '../../state/merchant';
 
 // custom hooks
 import useBackBtn from '../../hooks/useBackBtn';
+import useBottombar from '../../hooks/useBottombar';
 
 function MenuPage() {
-  const useBackBtnHook = useBackBtn();
+  const { hideBackBtn } = useBackBtn();
+  const { toCartBar } = useBottombar();
 
   const merchantData = useSelector(merchantSelector.merchantData);
 
   useLayoutEffect(() => {
-    useBackBtnHook.hideBackBtn();
+    hideBackBtn();
+    toCartBar({});
   }, []);
 
   return (
