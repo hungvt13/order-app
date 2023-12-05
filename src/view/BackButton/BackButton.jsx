@@ -10,6 +10,7 @@ import useBackBtn from '../../hooks/useBackBtn';
 const StyledDiv = styled('div')(({ theme }) => ({
   position: 'absolute',
   left: theme.spacing(2),
+  zIndex: 2,
 }));
 
 const StyledBtn = styled(IconButton)(({ theme }) => ({
