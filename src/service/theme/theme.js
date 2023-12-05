@@ -1,12 +1,12 @@
 import { createTheme } from '@mui/material';
 import {
-  red,
+  orange,
 } from '@mui/material/colors';
 
 const generateTheme = (preloadedTheme) => createTheme({
   palette: {
     primary: {
-      main: red[500],
+      main: orange[600],
     },
   },
 }, preloadedTheme);
