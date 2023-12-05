@@ -16,12 +16,11 @@ function* updateTotalPrice(action) {
     const itemTotalPrice = itemDetail.reduce((total, item) => total + item.totalPrice, 0);
     const itemQuantity = itemDetail.reduce((total, item) => total + item.quantity, 0);
 
-    // set final price into state
+    // set final price and quantity into state
     yield put(cartActions.updateTotalPrice(stateTotalPrice + itemTotalPrice));
     yield put(cartActions.updateQuantity(stateQuantity + itemQuantity));
   } catch (e) {
     console.log(e);
-    // yield put(userActions.fetchUserError({ errorMess: e.message }));
   }
 }
 
