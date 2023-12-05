@@ -20,7 +20,7 @@ function MenuItem({
     <Grid container sx={{ position: 'relative' }}>
       <Grid item xs={3} pr={2} display="grid" alignContent="center">
         <StyledImage
-          src={imgSrc}
+          src={imgSrc || FoodPlaceholder}
           alt=""
           srcSet=""
         />
