@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { styled } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 
@@ -33,4 +34,4 @@ MerchantImage.defaultProps = {
   imgSrc: RestaurantPlaceholder,
 };
 
-export default MerchantImage;
+export default memo(MerchantImage);

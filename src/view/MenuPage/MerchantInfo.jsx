@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 
 // components
@@ -43,4 +44,4 @@ MerchantInfo.defaultProps = {
   hours: 'Restaurant hours',
 };
 
-export default MerchantInfo;
+export default memo(MerchantInfo);
