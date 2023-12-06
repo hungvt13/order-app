@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -25,7 +26,7 @@ const ItemGrid = styled(Grid)(({ theme }) => ({
   },
 }));
 
-function MenuList({ menuItems }) {
+function MenuList({ menuItems, addRef }) {
   const navigate = useNavigate();
 
   const onClickItem = (categoryId, itemId) => {
@@ -40,7 +41,7 @@ function MenuList({ menuItems }) {
       {
         !!menuItems.length && menuItems.map((category) => (
           <Grid key={category.id} container>
-            <Grid item xs={12}>
+            <Grid item xs={12} ref={addRef}>
               <Typography variant="h5">
                 {category.category_name}
               </Typography>
@@ -72,10 +73,12 @@ function MenuList({ menuItems }) {
 MenuList.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   menuItems: PropTypes.array,
+  addRef: PropTypes.func,
 };
 
 MenuList.defaultProps = {
   menuItems: [],
+  addRef: () => {},
 };
 
-export default MenuList;
+export default memo(MenuList);
