@@ -1,4 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import {
+  useEffect, useRef, useState, useMemo,
+} from 'react';
 
 const useIntersection = (options) => {
   const targetRefs = useRef([]);
@@ -35,13 +37,13 @@ const useIntersection = (options) => {
     };
   }, [options]);
 
-  const addTargetRef = (ref) => {
+  const addTargetRef = useMemo((ref) => {
     if (ref && !targetRefs.current.includes(ref)) {
       targetRefs.current.push(ref);
     }
-  };
+  }, []);
 
-  const reset = () => {
+  const reset = useMemo(() => {
     targetRefs.current.forEach((target) => {
       if (target) {
         observerRef.current.unobserve(target);
@@ -49,7 +51,7 @@ const useIntersection = (options) => {
     });
 
     targetRefs.current = [];
-  };
+  }, []);
 
   return [addTargetRef, intersectingIndex, targetRefs, reset];
 };
