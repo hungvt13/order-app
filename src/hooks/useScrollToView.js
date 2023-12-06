@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 
-const useScrollToView = () => {
-  const itemRefs = useRef([]);
+const useScrollToView = (targetRefs = []) => {
+  const itemRefs = useRef(targetRefs);
 
   const scrollToItem = (index) => {
     if (itemRefs.current[index]) {
