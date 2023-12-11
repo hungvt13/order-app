@@ -16,7 +16,8 @@ function ActionBtn() {
       color="primary"
       variant="contained"
       onClick={barConfigs.func}
-      size="small"
+      size="large"
+      sx={{ height: '100%' }}
     >
       {barConfigs.content}
     </Button>

@@ -33,6 +33,7 @@ const useItemPage = () => {
 
   const [selected, setSelected] = useState({
     id: null,
+    categoryId: null,
     quantity: 1,
     options: {},
     required: [],
@@ -160,6 +161,8 @@ const useItemPage = () => {
     const id = uuidv4();
     const item = {
       id: selected.id,
+      localId: id,
+      categoryId,
       options: selected.options,
       quantity: selected.quantity,
       totalPrice: selected.totalPrice,

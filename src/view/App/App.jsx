@@ -7,7 +7,8 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Topbar from '../Topbar';
 import BackButton from '../BackButton';
-import Bottombar from '../Bottombar/Bottombar';
+import Bottombar from '../Bottombar';
+import MiniCart from '../MiniCart';
 
 // state
 import { merchantActions } from '../../state/merchant';
@@ -21,6 +22,7 @@ function App() {
 
   return (
     <Grid
+      id="app-container"
       container
       position="relative"
       flexDirection="column"
@@ -31,6 +33,7 @@ function App() {
       <Box flexGrow={1}>
         <Outlet />
       </Box>
+      <MiniCart />
       <Bottombar />
     </Grid>
   );

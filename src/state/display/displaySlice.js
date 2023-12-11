@@ -15,6 +15,9 @@ const initialState = {
   topbar: {
     height: 0,
   },
+  minicart: {
+    show: false,
+  },
 };
 
 const displaySlice = createSlice({
@@ -24,6 +27,9 @@ const displaySlice = createSlice({
     toggleBackBtn: (state, action) => {
       state.backBtn.show = action.payload.show;
       state.backBtn.path = action.payload.path;
+    },
+    toggleMinicart: (state, action) => {
+      state.minicart.show = action.payload.show;
     },
     resetBackBtn: (state) => {
       state.backBtn = initialState.backBtn;
