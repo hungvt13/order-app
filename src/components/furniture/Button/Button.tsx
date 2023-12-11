@@ -1,16 +1,11 @@
 
 import MuiButton, { ButtonProps } from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
-
-const StyledButton = styled(MuiButton)<ButtonProps>(({ theme }) => ({
-  padding: theme.spacing(2),
-}));
-
 function Button({ children, ...restProps } : ButtonProps) {
   return (
-    <StyledButton {...restProps}>
+    <MuiButton {...restProps}>
       {children}
-    </StyledButton>
+    </MuiButton>
   );
 }
 
