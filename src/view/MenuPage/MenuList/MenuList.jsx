@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -15,6 +15,10 @@ import { formatCurrency } from '../../../service/utils/currencyFormatter';
 // constant
 import PAGE_PATH from '../../../service/routes/constants';
 
+// custom hook
+import useCart from '../../../hooks/useCart';
+import useBottombar from '../../../hooks/useBottombar';
+
 const ItemGrid = styled(Grid)(({ theme }) => ({
   borderBottom: `0.5px solid ${theme.palette.grey[300]}`,
   paddingBottom: theme.spacing(1),
@@ -28,13 +32,61 @@ const ItemGrid = styled(Grid)(({ theme }) => ({
 
 function MenuList({ menuItems, addRef }) {
   const navigate = useNavigate();
+  const { cartItems, addMiniCart } = useCart();
+  const { toggleMiniCart } = useBottombar();
 
-  const onClickItem = (categoryId, itemId) => {
+  /**
+    * key: {
+    *   id: key,
+    *   localIds : [],
+    *   totalQuantity: 0
+    * }
+    */
+  const [addedItems, setAddedItems] = useState({});
+
+  const toItemPage = (categoryId, itemId) => {
     navigate({
       pathname: PAGE_PATH.ITEM_PAGE,
       search: `?categoryId=${categoryId}&itemId=${itemId}`,
     });
   };
+
+  const handleOnClick = (e, categoryId, itemId) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (addedItems[itemId]) {
+      const toMiniCartItems = Object.fromEntries(
+        Object.entries(cartItems)
+          .filter(([key]) => addedItems[itemId].localIds.includes(key)),
+      );
+
+      addMiniCart(toMiniCartItems);
+      toggleMiniCart({ show: true });
+    } else {
+      toItemPage(categoryId, itemId);
+    }
+  };
+
+  useEffect(() => {
+    if (cartItems.length !== 0) {
+      const populateQuantity = Object.values(cartItems).reduce((acc, item) => {
+        acc[item.id] = acc[item.id] ? {
+          ...acc[item.id],
+          localIds: [...acc[item.id].localIds, item.localId],
+          totalQuantity: acc[item.id].totalQuantity + item.quantity,
+        } : {
+          id: item.id,
+          localIds: [item.localId],
+          totalQuantity: item.quantity,
+        };
+
+        return acc;
+      }, {});
+
+      setAddedItems(populateQuantity);
+    }
+  }, [cartItems]);
 
   return (
     <Container>
@@ -52,13 +104,14 @@ function MenuList({ menuItems, addRef }) {
                   key={item.id}
                   item
                   xs={12}
-                  onClick={() => onClickItem(category.id, item.id)}
+                  onClick={(e) => handleOnClick(e, category.id, item.id)}
                 >
                   <MenuItem
                     imgSrc={item.image_source}
                     name={item.name}
                     description={item.description}
                     price={formatCurrency(item.price)}
+                    cartQuantity={addedItems[item.id]?.totalQuantity}
                   />
                 </ItemGrid>
               ))

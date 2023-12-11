@@ -26,7 +26,7 @@ const barConfigs = {
 };
 
 function Bottombar() {
-  const { barType } = useBottombar();
+  const { barType, barFunc } = useBottombar();
 
   const barContent = barConfigs[barType];
 
@@ -40,6 +40,7 @@ function Bottombar() {
       component="footer"
       sx={{ top: 'auto', bottom: 0 }}
       color={barColor}
+      onClick={barFunc}
     >
       <Toolbar disableGutters={disableGutters}>
         <BarComponent />

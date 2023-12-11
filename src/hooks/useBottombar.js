@@ -4,7 +4,9 @@ import { displayActions, displaySelector, BOTTOM_BAR_TYPE } from '../state/displ
 
 const useBottombar = () => {
   const dispatch = useDispatch();
-  const barType = useSelector(displaySelector.barType);
+  const barConfigs = useSelector(displaySelector.barConfigs);
+  const barType = barConfigs.type;
+  const barFunc = barConfigs.func;
 
   const toActionBar = ({ content = '', func = () => {} }) => {
     dispatch(displayActions.changeBottombar({
@@ -14,7 +16,10 @@ const useBottombar = () => {
     }));
   };
 
-  const toCartBar = ({ content = '', func = () => {} }) => {
+  const toCartBar = ({
+    content = '',
+    func = () => {},
+  }) => {
     dispatch(displayActions.changeBottombar({
       type: BOTTOM_BAR_TYPE.CART,
       content,
@@ -26,11 +31,17 @@ const useBottombar = () => {
     dispatch(displayActions.changeBottombarContent({ content }));
   };
 
+  const toggleMiniCart = ({ show = true }) => {
+    dispatch(displayActions.toggleMinicart({ show }));
+  };
+
   return {
     barType,
+    barFunc,
     toActionBar,
     toCartBar,
     changeContent,
+    toggleMiniCart,
   };
 };
 
