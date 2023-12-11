@@ -15,7 +15,6 @@ function ActionBtn() {
       fullWidth
       color="primary"
       variant="contained"
-      onClick={barConfigs.func}
       size="large"
       sx={{ height: '100%' }}
     >
