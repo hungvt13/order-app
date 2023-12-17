@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import IconButton from '../../../components/furniture/IconButton';
-import NumberButton from '../../NumberButton';
+import NumberButton from '../../../components/furniture/NumberButton';
 
 import FoodPlaceholder from '../../../asset/food_placeholder.svg';
 

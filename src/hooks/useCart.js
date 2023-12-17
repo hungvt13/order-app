@@ -35,11 +35,19 @@ const useCart = () => {
     dispatch(cartActions.updateMinicart(filteredItems));
   };
 
+  const updateCart = (item) => {
+    dispatch(cartActions.addToCart(item));
+  };
+
+  const getItemByLocalId = (localId) => cartItems[localId];
+
   return {
     addToCart,
     addMiniCart,
     removeCartItems,
     removeMiniCartItems,
+    getItemByLocalId,
+    updateCart,
     cartItems,
     cartTotalPrice,
     cartQuantity,

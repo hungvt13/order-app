@@ -9,6 +9,7 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import Container from '../../components/furniture/Container';
 import CheckboxGroup from '../../components/corner/CheckboxGroup';
 import IconButton from '../../components/furniture/IconButton';
+import RemoveDialog from './ItemDialog/RemoveDialog';
 
 // utils
 import { formatCurrency } from '../../service/utils/currencyFormatter';
@@ -34,6 +35,10 @@ function ItemPage() {
     getLabel,
     handleChangeOptions,
     handleChangeQuantity,
+    isEdit,
+    isRemoveDialog,
+    handleRemoveClose,
+    handleRemoveItem,
   } = useItemPage();
 
   return (
@@ -97,7 +102,7 @@ function ItemPage() {
           <IconButton
             color="primary"
             onClick={() => handleChangeQuantity(-1)}
-            disabled={selected.quantity === 1}
+            disabled={selected.quantity === 1 && !isEdit}
             size="large"
           >
             <RemoveCircleIcon fontSize="inherit" />
@@ -117,6 +122,12 @@ function ItemPage() {
           </IconButton>
         </Container>
       </Grid>
+      <RemoveDialog
+        open={isRemoveDialog}
+        itemName={currentItem?.name}
+        onClose={handleRemoveClose}
+        onAction={handleRemoveItem}
+      />
     </Grid>
   );
 }
