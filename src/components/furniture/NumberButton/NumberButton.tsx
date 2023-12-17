@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { styled } from '@mui/material/styles';
 
-import Button from '../../components/furniture/Button';
+import Button from '../Button';
 import { ButtonProps } from '@mui/material/Button';
 
 const StyledBtn = styled(Button)(({ theme }) => ({
