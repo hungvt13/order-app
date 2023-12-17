@@ -5,25 +5,27 @@ import {
 } from 'redux-saga/effects';
 
 import { cartActions } from './cartSlice';
-import { cartTotalPrice, cartQuantity } from './cartSelector';
+import { cartItems } from './cartSelector';
 
-function* updateTotalPrice(action) {
+function* updateTotalInfo() {
   try {
-    const data = action.payload;
-    const stateTotalPrice = yield select(cartTotalPrice);
-    const stateQuantity = yield select(cartQuantity);
-    const itemDetail = Object.values(data);
-    const itemTotalPrice = itemDetail.reduce((total, item) => total + item.totalPrice, 0);
-    const itemQuantity = itemDetail.reduce((total, item) => total + item.quantity, 0);
+    const stateCartItems = yield select(cartItems);
+    const { totalPrice, quantity } = Object.values(stateCartItems)
+      .reduce((acc, cartItem) => {
+        acc.totalPrice += cartItem.totalPrice;
+        acc.quantity += cartItem.quantity;
+
+        return acc;
+      }, { totalPrice: 0, quantity: 0 });
 
     // set final price and quantity into state
-    yield put(cartActions.updateTotalPrice(stateTotalPrice + itemTotalPrice));
-    yield put(cartActions.updateQuantity(stateQuantity + itemQuantity));
+    yield put(cartActions.updateTotalPrice(totalPrice));
+    yield put(cartActions.updateQuantity(quantity));
   } catch (e) {
     console.log(e);
   }
 }
 
 export default function* sagas() {
-  yield takeLatest(cartActions.addToCart, updateTotalPrice);
+  yield takeLatest(cartActions.addToCart, updateTotalInfo);
 }

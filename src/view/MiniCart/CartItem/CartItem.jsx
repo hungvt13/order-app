@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import NumberButton from '../../NumberButton';
+import { v4 as uuidv4 } from 'uuid';
+import NumberButton from '../../../components/furniture/NumberButton';
 
 // utils
 import { formatCurrency } from '../../../service/utils/currencyFormatter';
@@ -32,7 +33,7 @@ function CartItem({
           <Grid item xs={12}>
             {
               options.map((option) => (
-                <Box key={option.name}>
+                <Box key={uuidv4()}>
                   <Typography variant="body2">
                     {option.name}
                   </Typography>

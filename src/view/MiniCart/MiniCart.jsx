@@ -48,9 +48,15 @@ function MiniCart() {
   };
 
   const toItemPage = (categoryId, itemId, localId) => {
+    let searchStr = `?categoryId=${categoryId}&itemId=${itemId}`;
+
+    if (localId) {
+      searchStr += `&localId=${localId}`;
+    }
+
     navigate({
       pathname: PAGE_PATH.ITEM_PAGE,
-      search: `?categoryId=${categoryId}&itemId=${itemId}&localId=${localId}`,
+      search: searchStr,
     });
   };
 
@@ -61,36 +67,48 @@ function MiniCart() {
 
   const handleAddNew = (categoryId, itemId) => {
     toggleDrawer(false);
-    toItemPage(categoryId, itemId, null);
+    toItemPage(categoryId, itemId);
   };
 
   useEffect(() => {
+    // Check if miniCartItems and foods arrays are not empty
     if (miniCartItems.length !== 0 && foods.length !== 0) {
-      const buildList = Object.keys(miniCartItems)
-      // add the local id to item
-        .map((localId) => ({ localId, ...miniCartItems[localId] }))
-        // merge the user selected data to source data
-        .map((item) => {
-          const sourceFood = foods.find((targetFood) => targetFood.id === item.id);
-          const addedItem = {
-            ...item,
-            ...sourceFood,
-            options: Object.keys(item.options).map((groupId) => {
-              const optionIds = item.options[groupId];
-              const sourceGroup = sourceFood.options
-                .find((targetGroup) => targetGroup.id.toString() === groupId);
-              const sourceOptions = sourceGroup.option_list;
-              const mergedOptions = optionIds
-                .map((selectedId) => sourceOptions
-                  .find((option) => option.id.toString() === selectedId));
+      // Build a new list by mapping over the keys of miniCartItems
+      const buildList = Object.keys(miniCartItems).map((localId) => {
+        // Extract the item details from miniCartItems using localId
+        const item = { localId, ...miniCartItems[localId] };
 
-              return mergedOptions;
-            }).flat(1),
-          };
+        // Find the corresponding food item in the foods array
+        const sourceFood = foods.find((targetFood) => targetFood.id === item.id);
 
-          return addedItem;
-        });
+        // Merge item details with source food details
+        const addedItem = {
+          ...item,
+          ...sourceFood,
+          // Map over the entries of item.options (group ID and option IDs)
+          options: Object.entries(item.options).map(([groupId, optionIds]) => {
+            // Find the corresponding group in the source food options
+            const sourceGroup = sourceFood.options
+              .find((targetGroup) => targetGroup.id.toString() === groupId);
 
+            // Get the option list from the source group
+            const sourceOptions = sourceGroup.option_list;
+
+            // Map over optionIds to get the corresponding options from sourceOptions
+            const mergedOptions = optionIds
+              .map((selectedId) => sourceOptions
+                .find((option) => option.id.toString() === selectedId));
+
+            // Flatten the options array
+            return mergedOptions;
+          }).flat(),
+        };
+
+        // Return the merged item
+        return addedItem;
+      });
+
+      // Set the state with the built list
       setItems(buildList);
     }
   }, [foods, miniCartItems]);

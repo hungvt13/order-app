@@ -12,9 +12,14 @@ const useScrollToView = (targetRefs = []) => {
     }
   };
 
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
+
   return {
     itemRefs,
     scrollToItem,
+    scrollToTop,
   };
 };
 
