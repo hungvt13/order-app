@@ -8,21 +8,24 @@ const useBottombar = () => {
   const barType = barConfigs.type;
   const barFunc = barConfigs.func;
 
-  const toActionBar = ({ content = '', func = () => {} }) => {
+  const toActionBar = ({ content = '', subcontent = '', func = () => {} }) => {
     dispatch(displayActions.changeBottombar({
       type: BOTTOM_BAR_TYPE.ACTION,
       content,
+      subcontent,
       func,
     }));
   };
 
   const toCartBar = ({
     content = '',
+    subcontent = '',
     func = () => {},
   }) => {
     dispatch(displayActions.changeBottombar({
       type: BOTTOM_BAR_TYPE.CART,
       content,
+      subcontent,
       func,
     }));
   };
