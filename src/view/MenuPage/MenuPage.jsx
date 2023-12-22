@@ -16,19 +16,19 @@ import { merchantSelector } from '../../state/merchant';
 // custom hooks
 import useBackBtn from '../../hooks/useBackBtn';
 import useBottombar from '../../hooks/useBottombar';
-import useIntersection from './useIntersection';
+import useIntersection from '../../hooks/useIntersection';
 import useScrollToView from '../../hooks/useScrollToView';
 import useDebounce from '../../hooks/useDebounce';
 
 function MenuPage() {
   const { hideBackBtn } = useBackBtn();
   const { toCartBar } = useBottombar();
-  const [
+  const {
     addTargetRef,
     intersectingIndex,
     targetRefs,
     resetRef,
-  ] = useIntersection({ threshold: 0.5 });
+  } = useIntersection({ threshold: 0.5 });
   const { scrollToItem } = useScrollToView(targetRefs.current);
 
   const [search, setSearch] = useState('');
