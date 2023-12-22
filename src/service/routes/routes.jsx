@@ -10,6 +10,8 @@ const UserPage = lazy(() => retry(() => import('../../view/UserPage')));
 const LandingPage = lazy(() => retry(() => import('../../view/LandingPage')));
 const MenuPage = lazy(() => retry(() => import('../../view/MenuPage')));
 const ItemPage = lazy(() => retry(() => import('../../view/ItemPage')));
+const CheckoutPage = lazy(() => retry(() => import('../../view/CheckoutPage')));
+const PaymentComplete = lazy(() => retry(() => import('../../view/CheckoutPage/PaymentComplete/PaymentComplete')));
 
 const routes = createBrowserRouter([
   {
@@ -24,6 +26,14 @@ const routes = createBrowserRouter([
       {
         path: PAGE_PATH.ITEM_PAGE,
         element: <ItemPage />,
+      },
+      {
+        path: PAGE_PATH.CHECKOUT_PAGE,
+        element: <CheckoutPage />,
+      },
+      {
+        path: PAGE_PATH.PAYMENT_COMPLETE_PAGE,
+        element: <PaymentComplete />,
       },
       {
         path: PAGE_PATH.LANDING_PAGE,

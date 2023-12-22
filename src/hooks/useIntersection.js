@@ -53,7 +53,9 @@ const useIntersection = (options) => {
     targetRefs.current = [];
   }, []);
 
-  return [addTargetRef, intersectingIndex, targetRefs, reset];
+  return {
+    addTargetRef, intersectingIndex, targetRefs, reset,
+  };
 };
 
 export default useIntersection;

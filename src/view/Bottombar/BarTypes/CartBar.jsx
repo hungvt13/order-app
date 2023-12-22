@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import Typography from '@mui/material/Typography';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Badge from '@mui/material/Badge';
@@ -9,12 +11,15 @@ import useCart from '../../../hooks/useCart';
 // utils
 import { formatCurrency } from '../../../service/utils/currencyFormatter';
 
+// constants
+import PAGE_PATH from '../../../service/routes/constants';
+
 function CartBar() {
+  const navigate = useNavigate();
   const { cartQuantity, cartTotalPrice } = useCart();
 
   const handleCheckOut = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+    navigate(PAGE_PATH.CHECKOUT_PAGE);
   };
 
   return (
