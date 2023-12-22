@@ -38,7 +38,7 @@ function Bottombar() {
     <AppBar
       position="sticky"
       component="footer"
-      sx={{ top: 'auto', bottom: 0 }}
+      sx={{ top: 'auto', bottom: 0, zIndex: 100 }}
       color={barColor}
       onClick={barFunc}
     >

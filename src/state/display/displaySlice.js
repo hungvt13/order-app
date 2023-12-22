@@ -10,6 +10,7 @@ const initialState = {
   bottombar: {
     type: BOTTOM_BAR_TYPE.CART,
     content: '',
+    subcontent: '',
     func: () => {},
   },
   topbar: {
@@ -37,6 +38,7 @@ const displaySlice = createSlice({
     changeBottombar: (state, action) => {
       state.bottombar.type = action.payload.type;
       state.bottombar.content = action.payload.content;
+      state.bottombar.subcontent = action.payload.subcontent;
       state.bottombar.func = action.payload.func;
     },
     changeBottombarContent: (state, action) => {
