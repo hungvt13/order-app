@@ -1,1 +1,0 @@
-import{j as r}from"./index-8081a28e.js";import{B as s}from"./currencyFormatter-481eef7d.js";function a({children:t,...o}){return r.jsx(s,{...o,children:t})}a.defaultProps={variant:"dashed"};export{a as B};
