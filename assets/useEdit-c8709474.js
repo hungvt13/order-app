@@ -1,0 +1,1 @@
+import{u as r,P as c}from"./index-8081a28e.js";const n=()=>{const a=r();return{toItemPage:(s,o,t)=>{let e=`?categoryId=${s}&itemId=${o}`;t&&(e+=`&localId=${t}`),a({pathname:c.ITEM_PAGE,search:e})}}};export{n as u};
