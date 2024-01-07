@@ -1,1 +1,0 @@
-import{d as t,r as u,e as c,j as e}from"./index-31704dcc.js";import{u as o}from"./useDispatch-ef239331.js";const i=s=>s.user.userData,n=s=>s.user.userFetchStatus;function d(){const s=o(),r=t(i),a=t(n);return u.useEffect(()=>{s(c.fetchUserStart({id:1}))},[]),e.jsxs("div",{children:["User Data:",a,e.jsx("br",{}),JSON.stringify(r)]})}export{d as default};
